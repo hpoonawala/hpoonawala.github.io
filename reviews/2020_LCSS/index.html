@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+     
+  
+    <link rel="stylesheet" href="/css/jtd.css">
+  <link rel="icon" href="/assets/favicon.ico">
+
+   <title>Stability Analysis of Conewise Affine Dynamical Systems Using Conewise Linear Lyapunov Functions</title>  
+</head>
+<body>                      <!-- closed in foot.html -->
+<div class="page-wrap">   <!-- closed in foot.html -->
+  <!-- SIDE BAR -->
+  <div class="side-bar">
+    <div class="header">
+      <a href="/" class="title">
+        Lab Resources
+      </a>
+    </div>
+    <label for="show-menu" class="show-menu">MENU</label>
+    <input type="checkbox" id="show-menu" role="button">
+    <div class="menu" id="side-menu">
+      <ul class="menu-list">
+        <li class="menu-list-item "><a href="/" class="menu-list-link ">Home</a>
+        <li class="menu-list-item "><a href="/guidelines/" class="menu-list-link ">Guidelines</a>
+        <li class="menu-list-item "><a href="/tag/reviews/" class="menu-list-link ">Reviews</a>
+      </ul>
+    </div>
+    <div class="footer">
+      This is <em>Just the docs</em>, adapted from the <a href="https://github.com/pmarsceill/just-the-docs" target="_blank">Jekyll theme</a>.
+    </div>
+  </div>
+  <!-- CONTENT -->
+  <div class="main-content-wrap"> <!-- closed in foot.html -->
+    <div class="main-content">    <!-- closed in foot.html -->
+      <div class="main-header">
+        <a id="github" href="https://web.engr.uky.edu/~hap/">Poonawala Lab Website</a>
+      </div>
+
+
+
+<!-- Content appended here (in class franklin-content) -->
+
+
+<h2> Stability Analysis of Conewise Affine Dynamical Systems Using Conewise Linear Lyapunov Functions</h2>
+<ul>
+
+<li> Authors: Poonawala, H.A.</li>
+
+
+<li>Venue: Control Systems Letter</li>
+
+
+<li>Year: 2020</li>
+
+
+<li> Reviewed by: Hasan Poonawala, 
+</li>
+
+</ul>
+
+
+<div class="franklin-content"><div class="franklin-toc"><ol><li><a href="#broad_areaoverview">Broad area/overview</a></li><li><a href="#notation">Notation</a></li><li><a href="#specific_problem">Specific Problem</a></li><li><a href="#solution_ideas">Solution Ideas</a></li><li><a href="#comments">Comments</a></li><li><a href="#recent_papers">Recent Papers</a></li></ol></div>
+<h3 id="broad_areaoverview"><a href="#broad_areaoverview" class="header-anchor">Broad area/overview</a></h3>
+<p>This paper proposes automated algorithms to verify the stability of conewise affine dynamical systems using conewise linear Lyapunov functions. The conewise refers to a piecewise function. The pieces or cells in the state space are all unbounded cones, each with apex at the origin.</p>
+<h3 id="notation"><a href="#notation" class="header-anchor">Notation</a></h3>
+<ul>
+<li><p>\(x\): state, \(X\): State space</p>
+</li>
+<li><p>\(\mathcal P = \{X_i\}\): Partition of \(X\) into cones \(X_i\)</p>
+</li>
+<li><p>\(\Omega_{\mathcal P}\): Conewise dynamical system with partition \(\mathcal P \)</p>
+</li>
+<li><p>\(V_{\mathcal Q}(x)\): Conewise Lyapunov function with partition \(\mathcal Q = \{Z_j \}\)</p>
+</li>
+<li><p>\(p_j\): vector associated with \(Z_j\) so that \(V_{\mathcal Q}(x) = p_j^T x\) when \(x \in Z_j\)</p>
+</li>
+</ul>
+<h3 id="specific_problem"><a href="#specific_problem" class="header-anchor">Specific Problem</a></h3>
+<p>Most methods for Lyapunov-based analysis formulate stability conditions given a parametrization for the dynamical system and the Lyapunov function. Switched systems are often a good model for many nonlinear dynamical systems. Many approaches search for piecewise Lyapunov functions \(V_{\mathcal Q}(x)\) to analyze piecewise dynamical systems \(\Omega_{\mathcal P}\). Often, the \(\mathcal P = \mathcal Q\), and there is no reason to expect this Lyapunov function to be suitable. A natural idea is to refine the partition, however the refinement process is often heuristic.</p>
+<h3 id="solution_ideas"><a href="#solution_ideas" class="header-anchor">Solution Ideas</a></h3>
+<ul>
+<li><p>The paper reformulates Lyapunov stability conditions that include the state as a variable into an alternative set of conditions that do not contain the state as a variable. Unlike the S-procedure, this conversion is exact.</p>
+</li>
+<li><p>Unlike other methods, the stability conditions account for the case where the dynamics in regions adjacent to the origin are affine.</p>
+</li>
+<li><p>This paper uses the stability conditions to provide a better criterion for selecting which cells to refine. In contrast, previous conditions refined any cell for which the stability condition does not hold.</p>
+</li>
+</ul>
+<h3 id="comments"><a href="#comments" class="header-anchor">Comments</a></h3>
+<ul>
+<li><p>The paper appears to solve new problems unsolved by other methods, due to the specific stability conditions chosen</p>
+</li>
+<li><p>The paper claims that the refinement criterion is not heuristic, however a comparison to the heuristic methods is not provided</p>
+</li>
+<li><p>The examples have dimension 2 or 3. It is not clear if the computational framework will be able to solve higher dimension systems.</p>
+</li>
+</ul>
+<h3 id="recent_papers"><a href="#recent_papers" class="header-anchor">Recent Papers</a></h3>
+<p><em>Note: This section makes more sense for papers published 1-2 years ago or earlier, unlike this paper.</em></p>
+<ul>
+<li><p><a href="http://groups.csail.mit.edu/robotics-center/public_papers/Dai20.pdf">Hongkai Dai&#39;s paper</a> in CDC 2020 uses a conewise linear Lyapunov function defined through a ReLU neural network . They Define a loss function for violation of Lyapunov functions at points and max violation, and trains the network using it. This training has to include a Mixed Integer Linear Program. The common idea is to use partitions not defined by the dynamics, however there is no refinement, or advice on selecting the number of nodes. </p>
+</li>
+</ul>
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Hasan Poonawala. Last modified: February 21, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div> <!-- end of class main-content -->
+    </div> <!-- end of class main-content-wrap -->
+    </div> <!-- end of class page-wrap-->
+    
+      <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+    
+    
+  </body>
+</html>

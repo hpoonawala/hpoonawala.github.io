@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+     
+  
+    <link rel="stylesheet" href="/css/jtd.css">
+  <link rel="icon" href="/assets/favicon.ico">
+
+   <title>On the Feedback Linearization of Robots with Variable Joint Stiffness</title>  
+</head>
+<body>                      <!-- closed in foot.html -->
+<div class="page-wrap">   <!-- closed in foot.html -->
+  <!-- SIDE BAR -->
+  <div class="side-bar">
+    <div class="header">
+      <a href="/" class="title">
+        Lab Resources
+      </a>
+    </div>
+    <label for="show-menu" class="show-menu">MENU</label>
+    <input type="checkbox" id="show-menu" role="button">
+    <div class="menu" id="side-menu">
+      <ul class="menu-list">
+        <li class="menu-list-item "><a href="/" class="menu-list-link ">Home</a>
+        <li class="menu-list-item "><a href="/guidelines/" class="menu-list-link ">Guidelines</a>
+        <li class="menu-list-item "><a href="/tag/reviews/" class="menu-list-link ">Reviews</a>
+      </ul>
+    </div>
+    <div class="footer">
+      This is <em>Just the docs</em>, adapted from the <a href="https://github.com/pmarsceill/just-the-docs" target="_blank">Jekyll theme</a>.
+    </div>
+  </div>
+  <!-- CONTENT -->
+  <div class="main-content-wrap"> <!-- closed in foot.html -->
+    <div class="main-content">    <!-- closed in foot.html -->
+      <div class="main-header">
+        <a id="github" href="https://web.engr.uky.edu/~hap/">Poonawala Lab Website</a>
+      </div>
+
+
+
+<!-- Content appended here (in class franklin-content) -->
+
+
+<h2> On the Feedback Linearization of Robots with Variable Joint Stiffness</h2>
+<ul>
+
+<li> Authors: Palli, G.; Melchiorri, C.;De Luca, A.;</li>
+
+
+<li>Venue: IEEE International conference on Robotics and Automation</li>
+
+
+<li>Year: 2008</li>
+
+
+<li> Reviewed by: Pouya Samanipour, second reviewer, 
+</li>
+
+</ul>
+
+
+<div class="franklin-content"><div class="franklin-toc"><ol><li><a href="#broad_areaoverview">Broad area/overview</a></li><li><a href="#notation">Notation</a></li><li><a href="#specific_problem">Specific Problem</a></li><li><a href="#solution_ideas">Solution Ideas</a></li><li><a href="#comments">Comments</a></li><li><a href="#recent_papers">Recent Papers</a></li></ol></div>
+<h3 id="broad_areaoverview"><a href="#broad_areaoverview" class="header-anchor">Broad area/overview</a></h3>
+<p>This paper presents a solution on increasing the safety of using robot in human environment. Inertia of the links and the magnitude of the torque that actuators can apply make a limitation on the safety of robots. In this paper the stiffness of joint is not considered constant and it is used as a external control input. Finally, it was shown that this method is capable of full state linearization and also control of the position as well as stiffness of the joint.</p>
+<h3 id="notation"><a href="#notation" class="header-anchor">Notation</a></h3>
+<ul>
+<li><p>\(q\): generalized coordinate for driven links</p>
+</li>
+<li><p>\(\Theta\): generalized coordinate for driven links</p>
+</li>
+<li><p>\( M(q)\) is the inertia of robot links</p>
+</li>
+<li><p>\(N(q, q')\): centrifugal, coriolis and gravity force</p>
+</li>
+</ul>
+<p>*\(K=diag{k_1,K_2,...,k_n}>0\) is the joint stiffness matrix *\(B=diag{b_1,b_2,...,b_n}\) is the inertia matrix of actuators *\(\Taw\) are the motor torques</p>
+<h3 id="specific_problem"><a href="#specific_problem" class="header-anchor">Specific Problem</a></h3>
+<p>This paper aims to show how the full state linearization and simultaneous control of both the position and the stiffness of the joints can be achieved via static or dynamic feedback for the general dynamic model of a robotic manipulator with variable joint stiffness. We suppose that the mechanical stiffness of the joint can be modulated by means of external control inputs.</p>
+<h3 id="solution_ideas"><a href="#solution_ideas" class="header-anchor">Solution Ideas</a></h3>
+<ul>
+<li><p>The paper used the stiffness as an input to the nonlinear model of the robot in the simplest case. \(u=[\Taw \Taw_k]^T\),\(x=[q q' \theta \theta']^T\)</p>
+</li>
+<li><p>in order to avoid neglecting the dynamic of stiffness changes, a second order differential equation is considered for the variable stiffness.</p>
+</li>
+<li><p>In this paper, the torque of a desired path in the inverse dynamic is obtained without direct dependencies on \(\Theta\).</p>
+</li>
+</ul>
+<p>*It was shown in this paper that a static feedback linearization can used if the sum of the vector relative degrees is satisfied. *If this condition is not satisfied, then a dynamic feedback linearization is required to control the \(q\) as well as joint stiffness. *An auxiliary control input is defined to make the dynamic feedback linearization possible.</p>
+<h3 id="comments"><a href="#comments" class="header-anchor">Comments</a></h3>
+<ul>
+<li><p>The inverse kinematic is just implemented for the simple modeling of the stiffness.</p>
+</li>
+<li><p>If one wishes to include hard nonlinearities in the inverse dynamics computation, it should be noted that the link dynamics needs to be differentiated twice</p>
+</li>
+</ul>
+<p>*Furthermore, in the presence of actuator saturations, it is possible to keep the command torques τd within the saturation limited. *It is necessary to assume that the joint stiffness are measurable quantities. This assumption is not restrictive because the knowledge of the system state allows to compute the joint stiffness.</p>
+<h3 id="recent_papers"><a href="#recent_papers" class="header-anchor">Recent Papers</a></h3>
+<p>*Note: This section makes more sense for papers published 1-2 years ago or earlier, unlike this paper that is still in press.</p>
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Hasan Poonawala. Last modified: March 02, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div> <!-- end of class main-content -->
+    </div> <!-- end of class main-content-wrap -->
+    </div> <!-- end of class page-wrap-->
+    
+      <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+    
+    
+  </body>
+</html>

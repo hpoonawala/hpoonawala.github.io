@@ -74,7 +74,9 @@ pre,
 address,
 blockquote,
 dl,
-div,
+div {
+  text-align: justify;
+  },
 fieldset,
 form,
 hr,

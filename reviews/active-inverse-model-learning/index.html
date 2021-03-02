@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+     
+  
+    <link rel="stylesheet" href="/css/jtd.css">
+  <link rel="icon" href="/assets/favicon.ico">
+
+   <title>Active Inverse Model Learning with Error and Reachable Set Estimates</title>  
+</head>
+<body>                      <!-- closed in foot.html -->
+<div class="page-wrap">   <!-- closed in foot.html -->
+  <!-- SIDE BAR -->
+  <div class="side-bar">
+    <div class="header">
+      <a href="/" class="title">
+        Lab Resources
+      </a>
+    </div>
+    <label for="show-menu" class="show-menu">MENU</label>
+    <input type="checkbox" id="show-menu" role="button">
+    <div class="menu" id="side-menu">
+      <ul class="menu-list">
+        <li class="menu-list-item "><a href="/" class="menu-list-link ">Home</a>
+        <li class="menu-list-item "><a href="/guidelines/" class="menu-list-link ">Guidelines</a>
+        <li class="menu-list-item "><a href="/tag/reviews/" class="menu-list-link ">Reviews</a>
+      </ul>
+    </div>
+    <div class="footer">
+      This is <em>Just the docs</em>, adapted from the <a href="https://github.com/pmarsceill/just-the-docs" target="_blank">Jekyll theme</a>.
+    </div>
+  </div>
+  <!-- CONTENT -->
+  <div class="main-content-wrap"> <!-- closed in foot.html -->
+    <div class="main-content">    <!-- closed in foot.html -->
+      <div class="main-header">
+        <a id="github" href="https://web.engr.uky.edu/~hap/">Poonawala Lab Website</a>
+      </div>
+
+
+
+<!-- Content appended here (in class franklin-content) -->
+
+
+<h2> Active Inverse Model Learning with Error and Reachable Set Estimates</h2>
+<ul>
+
+<li> Authors: Driess, Danny; Schmitt, Syn; Toussaint, Marc;</li>
+
+
+<li>Venue: IROS</li>
+
+
+<li>Year: 2019</li>
+
+
+<li> Reviewed by: Benton Clark, 
+</li>
+
+</ul>
+
+
+<div class="franklin-content"><div class="franklin-toc"><ol><li><a href="#broad_areaoverview">Broad area/overview</a></li><li><a href="#notation">Notation</a></li><li><a href="#specific_problem">Specific Problem</a></li><li><a href="#solution_ideas">Solution Ideas</a></li><li><a href="#comments">Comments</a></li><li><a href="#recent_papers">Recent Papers</a></li></ol></div>
+<h3 id="broad_areaoverview"><a href="#broad_areaoverview" class="header-anchor">Broad area/overview</a></h3>
+<p>This paper deals with three primary topics:</p>
+<ol>
+<li><p>Formalization of an inverse &#40;control&#41; model learning problem,</p>
+</li>
+<li><p>Estimation of the reachable set &#40;domain of inverse model&#41;</p>
+</li>
+<li><p>Active exploration strategy for efficiently sampling and estimating the reachable set</p>
+</li>
+</ol>
+<p>They claim that learning an inverse model in conjunction with learning from data improves the performance of estimation.</p>
+<h3 id="notation"><a href="#notation" class="header-anchor">Notation</a></h3>
+<ul>
+<li><p>\(\mathcal{X}\subset\mathbb{R}^n\): Reachable set, \(\hat{\mathcal{X}}_c\): Estimated reachable set &#40;error certainty \(c>0\)&#41;</p>
+</li>
+<li><p>\(\mathcal{U}\subset\mathbb{R}^m\): Control Space</p>
+</li>
+<li><p>\(\hat{\phi}:\mathcal{U}\rightarrow\mathcal{X}\): True system model, \(\phi:\mathcal{U}\rightarrow\mathcal{X}\): Estimated system model</p>
+</li>
+<li><p>\(\pi:\mathcal{X}\rightarrow\mathcal{U}\): Inverse model s.t. \(\forall x\in\mathcal{S},\quad \hat{\phi}(\pi(x))=x\)</p>
+</li>
+<li><p>\(\mathcal{D}_\mathcal{X}\triangleq\{(x^i,u^i)\}_{i=1}^N\): \(N\) sets of labeled training points corresponding to the input \(u^i\) such that \(\hat{\phi}(u^i)=x^i\).</p>
+</li>
+</ul>
+<h3 id="specific_problem"><a href="#specific_problem" class="header-anchor">Specific Problem</a></h3>
+<p>The group looks to estimate the reachable set of a human arm while learning both the forward and inverse model estimates \(\phi\) and \(\pi\), respectively. Both \(\phi\) and \(\pi\) are learned exclusively from self-labeled data points, meaning the forward and inverse model are learned in a self-supervised fashion. The estimate \(\phi\) is used to estimate \(\hat{\mathcal{X}}_c\), where \(\hat{\mathcal{X}}_c\) is then used to drive the active learning problem to facilitate exploration. Further explored points are then used to refine \(\phi\), and the cycle continues.</p>
+<p>Once training is completed, the model \(\pi\) can then be used to estimate the holding torques \(\pi(x)=u\) used to hold the arm stationary.</p>
+<h3 id="solution_ideas"><a href="#solution_ideas" class="header-anchor">Solution Ideas</a></h3>
+<ul>
+<li><p>The paper suggests that exploration and estimation, when coupled, can be helpful for forward and inverse modeling.</p>
+</li>
+<li><p>Exploration and estimation are coupled in the following way:</p>
+<ul>
+<li><p>Initial sample points used to train \(\phi\) and \(\pi\)</p>
+</li>
+<li><p>These estimates &#40;and error in estimates&#41; used to bound the estimated \(\hat{\mathcal{X}}_c\)</p>
+</li>
+<li><p>Fill-distance metric with estimated model error used to select next sample point</p>
+</li>
+<li><p>Inverse model \(\pi\) then trained on points in \(\mathcal{X}_c \union \mathcal{D}_\mathcal{X}\)</p>
+</li>
+<li><p>Continue exploration/training until \(N\) desired sample points collected</p>
+</li>
+</ul>
+</li>
+<li><p>Use reproducing kernel Hilbert space &#40;RKHS&#41; to give estimated prediction error of \(\phi\). This bound is useful for</p>
+<ul>
+<li><p>Upper bound on error of \(\phi\)</p>
+</li>
+<li><p>Learning the reachable subset \(\hat{\mathcal{X}}_c\)</p>
+</li>
+</ul>
+</li>
+<li><p>Authors&#39; results show workspace estimate improves quickly for relatively small number of sample points</p>
+</li>
+<li><p>Authors ran ablation study to see impact of each individual component</p>
+<ul>
+<li><p>When neglecting to optimize the upper bound of the inverse model estimate on real data, performance on reaching tasks suffer</p>
+</li>
+<li><p>Varying the error bound \(c\) of \(\hat{\mathcal{X}}_c\) impacts performance. </p>
+</li>
+</ul>
+<p>Increasing \(c\) results in a conservative estimate of the reaching space, hurting the learned inverse model. Decreasing \(c\rightarrow 0\) results in no points in \(\hat{\mathcal{X}}_c\), meaning the inverse model is trained exclusively off of real data. The important note is that while increasing \(c\) hurts performance to some degree, dropping \(c\) to 0 has major performance impacts &#40;up to 3x error in loss&#41;.</p>
+<ul>
+<li><p>Lastly looked at the importance of the fill-distance metric used for active exploration.</p>
+</li>
+</ul>
+<p>While it does appear to have some impact, one interesting consequence is that randomly exploring in \(\hat{\mathcal{X}}_c\) leads to relatively similar results.</p>
+</li>
+</ul>
+<h3 id="comments"><a href="#comments" class="header-anchor">Comments</a></h3>
+<ul>
+<li><p>Paper focuses on single real experimental example on a humanoid-like arm.</p>
+</li>
+<li><p>Results seem promising - it seems that exploration and model estimation may have benefits when coupled.</p>
+</li>
+<li><p>Results show that an inverse model, when trained on observed and well-estimated points, can outperform a network trained exclusively on observed data.</p>
+</li>
+<li><p>Their exploration did not take into account travel distance, energy metrics, etc.</p>
+</li>
+</ul>
+<p>Likewise, their point selection during exploration was focused on minimizing the largest circle between points &#40;fill-distance&#41;, which may be unrelated to what is the most useful point to sample next. Could be room for future work to explore.</p>
+<ul>
+<li><p>Actual experimental data seems to be very low dimensional state-space &#40;but relatively high dimensional control space&#41;.</p>
+</li>
+</ul>
+<p>Algorithm suggested could have difficulty when looking at higher DOF systems.</p>
+<ul>
+<li><p>Authors suggest this method can be used to actively learn other inverse models - might be an interesting avenue to explore.</p>
+</li>
+</ul>
+<h3 id="recent_papers"><a href="#recent_papers" class="header-anchor">Recent Papers</a></h3>
+<p><a href="https://www.sciencedirect.com/science/article/abs/pii/S0921889012000644">Active Learning of Inverse Models with intrinsically motivated goal exploration in robots</a> - A custom architecture is proposed that allows for efficient, intrinsically motivated goal exploration in the attempt to learn inverse models in high-dimensional space.</p>
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Hasan Poonawala. Last modified: March 02, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div> <!-- end of class main-content -->
+    </div> <!-- end of class main-content-wrap -->
+    </div> <!-- end of class page-wrap-->
+    
+      <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+    
+    
+  </body>
+</html>

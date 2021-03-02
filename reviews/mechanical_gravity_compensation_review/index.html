@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+     
+  
+    <link rel="stylesheet" href="/css/jtd.css">
+  <link rel="icon" href="/assets/favicon.ico">
+
+   <title>Gravity Compensation in Robotics</title>  
+</head>
+<body>                      <!-- closed in foot.html -->
+<div class="page-wrap">   <!-- closed in foot.html -->
+  <!-- SIDE BAR -->
+  <div class="side-bar">
+    <div class="header">
+      <a href="/" class="title">
+        Lab Resources
+      </a>
+    </div>
+    <label for="show-menu" class="show-menu">MENU</label>
+    <input type="checkbox" id="show-menu" role="button">
+    <div class="menu" id="side-menu">
+      <ul class="menu-list">
+        <li class="menu-list-item "><a href="/" class="menu-list-link ">Home</a>
+        <li class="menu-list-item "><a href="/guidelines/" class="menu-list-link ">Guidelines</a>
+        <li class="menu-list-item "><a href="/tag/reviews/" class="menu-list-link ">Reviews</a>
+      </ul>
+    </div>
+    <div class="footer">
+      This is <em>Just the docs</em>, adapted from the <a href="https://github.com/pmarsceill/just-the-docs" target="_blank">Jekyll theme</a>.
+    </div>
+  </div>
+  <!-- CONTENT -->
+  <div class="main-content-wrap"> <!-- closed in foot.html -->
+    <div class="main-content">    <!-- closed in foot.html -->
+      <div class="main-header">
+        <a id="github" href="https://web.engr.uky.edu/~hap/">Poonawala Lab Website</a>
+      </div>
+
+
+
+<!-- Content appended here (in class franklin-content) -->
+
+
+<h2> Gravity Compensation in Robotics</h2>
+<ul>
+
+<li> Authors: Vigen, A.</li>
+
+
+<li>Venue: Advanced Robotics</li>
+
+
+<li>Year: 2016</li>
+
+
+<li> Reviewed by: David Yackzan, 
+</li>
+
+</ul>
+
+
+<div class="franklin-content"><div class="franklin-toc"><ol><li><a href="#broad_areaoverview">Broad area/overview</a></li><li><a href="#specific_problem">Specific Problem</a></li><li><a href="#solution_ideas">Solution Ideas</a></li><li><a href="#comments">Comments</a></li><li><a href="#recent_papers">Recent Papers</a></li></ol></div>
+<h3 id="broad_areaoverview"><a href="#broad_areaoverview" class="header-anchor">Broad area/overview</a></h3>
+<p>Gravity compensation in robotics concerns the application of a counter force at joints to resist torque caused by the weight of links or objects being held by the end effector to ensure equilibrium througout motion. This paper provides an overview of the various mechanical techniques employed in robotic design concerning gravity compensation.</p>
+<h3 id="specific_problem"><a href="#specific_problem" class="header-anchor">Specific Problem</a></h3>
+<p>The author outlines gravity compensation in robotic systems as solution to the prevelent issue of the significant actuation power needed to resist joint torques. The purpose of this paper is to introduce various mechanical solutions for that issue, present their strengths and weaknesses, and to review the techniques as as whole.</p>
+<h3 id="solution_ideas"><a href="#solution_ideas" class="header-anchor">Solution Ideas</a></h3>
+<p>The author of this paper analyzes the techniques in three main groups: counterweight, spring and active force developed by an auxilary actuator:</p>
+<ol>
+<li><p>Gravity compensation by counterweights</p>
+<ul>
+<li><p>The goal of this method is to apply the right amount of counterweight to zero &#40;or get as close to zero as possible&#41; the torques acting at a system&#39;s joints.</p>
+</li>
+<li><p>Mounting counterweights on a system is often an undesireable method of gravity compensation due to additional size and mass.</p>
+</li>
+<li><p>However the strategy can effectively reduce power consumption for low speed applications as the actuators will not need to do as much work to move links when they are appropriately compensated.</p>
+</li>
+</ul>
+</li>
+<li><p>Gravity compensation by springs</p>
+<ul>
+<li><p>Balancing by springs jointed directly with manipulator links can be an effective, and lighter-weight compensation strategy.</p>
+</li>
+<li><p>This strategy can become more versaitile and effective when applied in concert with other mechanical arrangements such as the cable and pulley, or auxilary linkages like cam mechanisms and gear trains.</p>
+</li>
+<li><p>Some drawbacks to the practical implementations of these strategies come from the lack of precision involved in spring manufacturing. Often the actual values of springs are very different than their nominal values &#40;especially considering their non-linearity&#41;.</p>
+</li>
+<li><p>The additions of auxilary links also complicates calculations and makes precision more difficult due to manufacturing tolerances.</p>
+</li>
+</ul>
+</li>
+<li><p>Gravity compensation by using auxilary actuators</p>
+<ul>
+<li><p>To acheive compensation in this case pneumatics or hydraulics are incorporated into the system in connection with the manipulator links.</p>
+</li>
+<li><p>Auxilary actuators can be placed in various combinations with links &#40;many examples are illustrated in the original document&#41; and the application of this technique offers a lot of versatility and control.</p>
+</li>
+<li><p>The drawbacks to this method lie in the complexity of its implementation in systems that are not planar parallel manipulators &#40;spatial parallel architectures&#41;. An optimal approach the author offers for these more complicated systems would be the combination of an auxilary linkage and an auxilary actuator.</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="comments"><a href="#comments" class="header-anchor">Comments</a></h3>
+<ul>
+<li><p>This paper only reviews mechanical techniques for gravity compensation in robotics and does not review the various methods of gravity compensation concerning optimal control of joint torque input.</p>
+</li>
+<li><p>This paper largely consisted of specific examples of the different types of solutions as they are employed in practical applications. In the interest of brevity, the specific examples were ommitted and the main ideas were extracted for this review.</p>
+</li>
+</ul>
+<h3 id="recent_papers"><a href="#recent_papers" class="header-anchor">Recent Papers</a></h3>
+<ul>
+<li><p>In this applied sciences article titled <em>Low-Cost Automation for Gravity Compensation af Robotic Arm</em> &#40;https://www.mdpi.com/2076-3417/10/11/3823/pdf&#41; the control-based method for gravity compensation is explored using a Raspberry Pi with the Robot Operation System &#40;ROS&#41; installed.</p>
+</li>
+</ul>
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Hasan Poonawala. Last modified: March 01, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div> <!-- end of class main-content -->
+    </div> <!-- end of class main-content-wrap -->
+    </div> <!-- end of class page-wrap-->
+    
+      <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+    
+    
+  </body>
+</html>

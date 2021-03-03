@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+     
+  
+    <link rel="stylesheet" href="/css/jtd.css">
+  <link rel="icon" href="/assets/favicon.ico">
+
+   <title>Dynamic Modeling of Fixed-Wing UAVs</title>  
+</head>
+<body>                      <!-- closed in foot.html -->
+<div class="page-wrap">   <!-- closed in foot.html -->
+  <!-- SIDE BAR -->
+  <div class="side-bar">
+    <div class="header">
+      <a href="/" class="title">
+        Lab Resources
+      </a>
+    </div>
+    <label for="show-menu" class="show-menu">MENU</label>
+    <input type="checkbox" id="show-menu" role="button">
+    <div class="menu" id="side-menu">
+      <ul class="menu-list">
+        <li class="menu-list-item "><a href="/" class="menu-list-link ">Home</a>
+        <li class="menu-list-item "><a href="/guidelines/" class="menu-list-link ">Guidelines</a>
+        <li class="menu-list-item "><a href="/tag/reviews/" class="menu-list-link ">Reviews</a>
+      </ul>
+    </div>
+    <div class="footer">
+      This is <em>Just the docs</em>, adapted from the <a href="https://github.com/pmarsceill/just-the-docs" target="_blank">Jekyll theme</a>.
+    </div>
+  </div>
+  <!-- CONTENT -->
+  <div class="main-content-wrap"> <!-- closed in foot.html -->
+    <div class="main-content">    <!-- closed in foot.html -->
+      <div class="main-header">
+        <a id="github" href="https://web.engr.uky.edu/~hap/">Poonawala Lab Website</a>
+      </div>
+
+
+
+<!-- Content appended here (in class franklin-content) -->
+
+
+<h2> Dynamic Modeling of Fixed-Wing UAVs</h2>
+<ul>
+
+<li> Authors: A. North; S. Bouabdallah; R. Siegwart;</li>
+
+
+<li>Venue: Autonomous Systems Laboratory, ETH Zurich</li>
+
+
+<li>Year: 2006</li>
+
+
+<li> Reviewed by: Ruchik Mishra, 
+</li>
+
+</ul>
+
+
+<div class="franklin-content"><div class="franklin-toc"><ol><li><a href="#motivation_for_this_review">Motivation for this review</a></li><li><a href="#notation_as_used_in_the_article">Notation as used in the article</a></li><li><a href="#objectives">Objectives</a></li><li><a href="#rotation_parameters">Rotation parameters</a></li><li><a href="#example_of_the_airplane">Example of the airplane</a></li><li><a href="#dynamics_modelling">Dynamics modelling</a></li><li><a href="#aerodynamic_forces_of_an_airfoil">Aerodynamic forces of an airfoil</a></li><li><a href="#final_model_of_the_airplane_is_given_by_the_following_equations">Final model of the airplane is given by the following equations:</a></li><li><a href="#comments">Comments</a></li><li><a href="#references">References</a></li></ol></div>
+<h3 id="motivation_for_this_review"><a href="#motivation_for_this_review" class="header-anchor">Motivation for this review</a></h3>
+<p>This review of the article mentioned is just one of the series of documents that will talk about modelling the dynamics of a fixed-wing UAV. By the end of this document, one should be able to write thew equations of motion of a fixed wing aircraft given the control surfaces.</p>
+<p>The dynamics of the Sky-Sailor aircraft has been described as mentioned in the reference article.</p>
+<h3 id="notation_as_used_in_the_article"><a href="#notation_as_used_in_the_article" class="header-anchor">Notation as used in the article</a></h3>
+<ul>
+<li><p>\(\psi\): yaw angle</p>
+</li>
+<li><p>\(\phi\): roll angle</p>
+</li>
+<li><p>\(\theta\): pitch angle</p>
+</li>
+<li><p>\(\sigma\): Density of fluid &#40;Air&#41;</p>
+</li>
+<li><p>\(C_{L}\): Lift coefficient</p>
+</li>
+<li><p>\(C_{D}\): Drag coefficient</p>
+</li>
+<li><p>\(C_{M}\): Moment coefficient</p>
+</li>
+<li><p>\(\rho\): Density of fluid</p>
+</li>
+<li><p>\(S\): wing area</p>
+</li>
+<li><p>\(\nu\): Flight speed &#40;relative to surrounding fluid&#41;.</p>
+</li>
+<li><p>\(C_{L}\): Lift coefficient.</p>
+</li>
+<li><p>\(C_{D}\): Drag coefficient.</p>
+</li>
+<li><p>\(C_{M}\): Moment coefficient.</p>
+</li>
+</ul>
+<h3 id="objectives"><a href="#objectives" class="header-anchor">Objectives</a></h3>
+<ul>
+<li><p>Shows the control surfaces of this airplane.</p>
+</li>
+<li><p>Models the Sky-Sailor airplane which is a fixed-wing aircraft with a v-tail.</p>
+</li>
+</ul>
+<h3 id="rotation_parameters"><a href="#rotation_parameters" class="header-anchor">Rotation parameters</a></h3>
+<p>The most commom form of representing angles in aerospace is the Tait-Bryan notations. In tait-bryan notations, unlike the Euler notations, each Euler angle triplet specify the rotation around a different Cartesian axis &#123;See Reference 2&#125;. To define the rotations, order of the rotation matters. The complete rotation matrix is given by:</p>
+\(R(\phi,\theta,psi) =
+\begin{bmatrix}cos\psi cos\theta & cos\psi sin\theta sin\phi - sin\psi cos\phi  &cos\psi sin\theta cos\phi+sin\psi sin\phi\\sin\psi cos\theta & sin\psi sin\theta sin\phi + cos\psi cos\phi & sin\psi sin\theta cos\phi - sin\phi cos\psi\\-sin\theta &cos\theta sin\phi& cos\theta cos\phi \end{bmatrix}\)
+<p>The above rotation matrix denotes the rotation around \(\overrightarrow{x}\), \(\overrightarrow{y}\) and \(\overrightarrow{z}\) by an angle of \(\phi\), \(\theta\) and \(\psi\) respectively.</p>
+<p>Similarly, the rate of change of the Trait-Bryan angles is denoted by \((\dot{\phi},\dot{\theta},\dot{\psi})\), then the body angular rate of change is given by &#40;p,q,r&#41; where: \(\begin{bmatrix}p  \\q \\ r \end{bmatrix} = R_{r}\begin{bmatrix}\dot{\phi}  \\\dot{\theta} \\\dot{\psi} \end{bmatrix}\)</p>
+<p>where \(R_{r}\) is equal to:</p>
+\(R_{r}=
+\begin{bmatrix}1 & 0 &-sin\theta\\0& cos\phi & sin\phi cos\theta\\0&-sin\phi& cos\theta cos\phi \end{bmatrix}\)
+<p>The derivation of the above equality can be found in Reference 3.</p>
+<h3 id="example_of_the_airplane"><a href="#example_of_the_airplane" class="header-anchor">Example of the airplane</a></h3>
+<p>The contributions of the forces and moments acting on an airplane are made by three factors:</p>
+<ul>
+<li><p>Aerodynamic,</p>
+</li>
+<li><p>Gravitational, and</p>
+</li>
+<li><p>Propulsive.</p>
+</li>
+</ul>
+<p>The control surfaces of the aircraft considered in this article are:</p>
+<ul>
+<li><p>The two ailerons attached on the wing, and</p>
+</li>
+<li><p>The V-tail.</p>
+</li>
+</ul>
+<h3 id="dynamics_modelling"><a href="#dynamics_modelling" class="header-anchor">Dynamics modelling</a></h3>
+<p>In the Sky-sailor aircraft, the forces acting on it are:</p>
+<ul>
+<li><p>the weight &#40;acting at the centre of gravity&#41;.</p>
+</li>
+<li><p>the thrust of the propeller acting in the x direction which coincides with the axis of the fuselage of the aircraft.</p>
+</li>
+<li><p>aerodynamic forces of each part of the airplane.</p>
+</li>
+</ul>
+<h3 id="aerodynamic_forces_of_an_airfoil"><a href="#aerodynamic_forces_of_an_airfoil" class="header-anchor">Aerodynamic forces of an airfoil</a></h3>
+<p>The aerodynamic forces acting on the airfoil are given by:</p>
+<ul>
+<li><p>\(F_{l} = C_{L}\frac{\rho}{2}Sv^{2}\)</p>
+</li>
+<li><p>\(F_{d} = C_{d}\frac{\rho}{2}Sv^{2}\)</p>
+</li>
+<li><p>\(M = C_{m}\frac{\rho}{2}Sv^{2}.chord\)</p>
+</li>
+</ul>
+<p>where chord is the line joining the leading and trailing edge of the wing.</p>
+<h3 id="final_model_of_the_airplane_is_given_by_the_following_equations"><a href="#final_model_of_the_airplane_is_given_by_the_following_equations" class="header-anchor">Final model of the airplane is given by the following equations:</a></h3>
+<ul>
+<li><p>\(\ddot{x} = \frac{F_{total,x}}{m}-gsin\theta\)</p>
+</li>
+<li><p>\(\ddot{y} = \frac{F_{total,y}}{m}-gsin\phi cos\theta\)</p>
+</li>
+<li><p>\(\ddot{z} = \frac{F_{total,z}}{m}-gcos\phi cos\theta\)</p>
+</li>
+<li><p>\(\ddot{\phi} = \frac{I_{xx}-I_{zz}}{I_{xx}} \dot{\psi}\dot{\theta} + \frac{M_{total,x}}{I_{xx}}\)</p>
+</li>
+<li><p>\(\ddot{\theta} = \frac{I_{zz}-I_{xx}}{I_{yy}} \dot{\psi}\dot{\phi} + \frac{M_{total,y}}{I_{yy}}\)</p>
+</li>
+<li><p>\(\ddot{\psi} = \frac{I_{xx}-I_{yy}}{I_{zz}} \dot{\theta}\dot{\phi} + \frac{M_{total,z}}{I_{zz}}\)</p>
+</li>
+</ul>
+<h3 id="comments"><a href="#comments" class="header-anchor">Comments</a></h3>
+<p>This article serves as a good starting point for before exploring the system identification methods as it gives a dynamic model for a v tail fixed wing aircraft.</p>
+<h3 id="references"><a href="#references" class="header-anchor">References</a></h3>
+<ol>
+<li><p>Noth, A., Bouabdallah, S. and Siegwart, R., 2006. Dynamic modeling of fixed-wing uavs. Swiss Federal institute of technology, version, 2.</p>
+</li>
+<li><p>Nelson, R.C., 1998. Flight stability and automatic control &#40;Vol. 2&#41;. New York: WCB/McGraw Hill.</p>
+</li>
+<li><p>Danceswithcode.net. 2021. 3D Rotations-Part 1. &#91;online&#93; Available at: <a href="http://danceswithcode.net/engineeringnotes/rotations_in_3d/rotations_in_3d_part1.html">http://danceswithcode.net/engineeringnotes/rotations_in_3d/rotations_in_3d_part1.html</a> &#91;Accessed 1 March 2021&#93;.</p>
+</li>
+</ol>
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Hasan Poonawala. Last modified: March 03, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div> <!-- end of class main-content -->
+    </div> <!-- end of class main-content-wrap -->
+    </div> <!-- end of class page-wrap-->
+    
+      <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+    
+    
+  </body>
+</html>

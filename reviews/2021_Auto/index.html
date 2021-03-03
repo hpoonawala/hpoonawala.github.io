@@ -135,6 +135,7 @@
     </div> <!-- end of class main-content -->
     </div> <!-- end of class main-content-wrap -->
     </div> <!-- end of class page-wrap-->
+
     
       <script src="/libs/katex/katex.min.js"></script>
 <script src="/libs/katex/auto-render.min.js"></script>
@@ -142,5 +143,23 @@
 
     
     
+    <script src="https://unpkg.com/stackedit-js@1.0.7/docs/lib/stackedit.min.js"></script>
+    <script>
+    import Stackedit from 'stackedit-js';
+    const el = document.querySelector('textarea');
+      const stackedit = new Stackedit();
+
+      // Open the iframe
+      stackedit.openFile({
+        name: 'Filename', // with an optional filename
+        content: {
+          text: el.value // and the Markdown content.
+        }
+      });
+
+      // Listen to StackEdit events and apply the changes to the textarea.
+      stackedit.on('fileChange', (file) => {
+        el.value = file.content.text;
+      });</script>
   </body>
 </html>

@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+     
+  
+    <link rel="stylesheet" href="/css/jtd.css">
+  <link rel="icon" href="/assets/favicon.ico">
+
+   <title>Active Inverse Model Learning with Error and Reachable Set Estimates</title>  
+</head>
+<body>                      <!-- closed in foot.html -->
+<div class="page-wrap">   <!-- closed in foot.html -->
+  <!-- SIDE BAR -->
+  <div class="side-bar">
+    <div class="header">
+      <a href="/" class="title">
+        Lab Resources
+      </a>
+    </div>
+    <label for="show-menu" class="show-menu">MENU</label>
+    <input type="checkbox" id="show-menu" role="button">
+    <div class="menu" id="side-menu">
+      <ul class="menu-list">
+        <li class="menu-list-item "><a href="/" class="menu-list-link ">Home</a>
+        <li class="menu-list-item "><a href="/guidelines/" class="menu-list-link ">Guidelines</a>
+        <li class="menu-list-item "><a href="/tag/reviews/" class="menu-list-link ">Reviews</a>
+      </ul>
+    </div>
+    <div class="footer">
+      This is <em>Just the docs</em>, adapted from the <a href="https://github.com/pmarsceill/just-the-docs" target="_blank">Jekyll theme</a>.
+    </div>
+  </div>
+  <!-- CONTENT -->
+  <div class="main-content-wrap"> <!-- closed in foot.html -->
+    <div class="main-content">    <!-- closed in foot.html -->
+      <div class="main-header">
+        <a id="github" href="https://web.engr.uky.edu/~hap/">Poonawala Lab Website</a>
+      </div>
+
+
+
+<!-- Content appended here (in class franklin-content) -->
+
+
+<h2> Active Inverse Model Learning with Error and Reachable Set Estimates</h2>
+<ul>
+
+<li> Authors: Driess, Danny; Schmitt, Syn; Toussaint, Marc</li>
+
+
+<li>Venue: International Conference on Intelligent Robots and Systems</li>
+
+
+<li>Year: 2019</li>
+
+
+<li> Reviewed by: Anonymized, 
+</li>
+
+</ul>
+
+
+<div class="franklin-content"><div class="franklin-toc"><ol><li><a href="#broad_areaoverview">Broad area/overview</a></li><li><a href="#notation">Notation</a></li><li><a href="#specific_problem">Specific problem</a></li><li><a href="#solution_ideas">Solution ideas</a></li><li><a href="#comments">Comments</a></li></ol></div>
+<h3 id="broad_areaoverview"><a href="#broad_areaoverview" class="header-anchor">Broad area/overview</a></h3>
+<p>This paper proposes an inverse model for a redudant system which has applications in learning to control musculoskeletal systems. The contributions listed are:</p>
+<ol>
+<li><p>Formalize the meaning of &#39;learning an inverse model&#39;.</p>
+</li>
+<li><p>Propose a method to find the reachable workspace.</p>
+</li>
+<li><p>In order to improve the inverse model, the training model of the forward model is efficiently generated.</p>
+</li>
+<li><p>To get a guaranteed uper bound on the performance in real systems.</p>
+</li>
+</ol>
+<h3 id="notation"><a href="#notation" class="header-anchor">Notation</a></h3>
+<ul>
+<li><p>\(\hat{\phi}\): True function.</p>
+</li>
+</ul>
+<ul>
+<li><p>\(<.,.>_{H_{k}}\): ineer product of the Reproducing kernel Hilbert Space &#40;RKHS&#41; associated with k.</p>
+</li>
+<li><p>\(\chi\): Reachable set.</p>
+</li>
+<li><p>\(\pi\): Inverse Model</p>
+</li>
+</ul>
+<h3 id="specific_problem"><a href="#specific_problem" class="header-anchor">Specific problem</a></h3>
+<p>Owing to the disadvantages of sparsity of the data used while using just the forward model for training, the paper approaches to estimate the the reachable set using learned models.</p>
+<h3 id="solution_ideas"><a href="#solution_ideas" class="header-anchor">Solution ideas</a></h3>
+<ul>
+<li><p>Coining a function using kernel based methods to keep in check the error that is obtained between the true and the learned functions.</p>
+</li>
+<li><p>Kernel ridge expression:</p>
+<ul>
+<li><p>\(\min_{\phi \in  H_{k}}\sum_{i=1}^n\mid x_{i}-\phi(u_{i})\mid^{2} + \sigma^{2}\parallel\phi\parallel^{2}_{H_{k}}\)</p>
+</li>
+</ul>
+<p>where \(\sigma \geq 0\) is the regularization parameter.</p>
+</li>
+<li><p>Error estimate:</p>
+<ul>
+<li><p>\(\mid \hat{\phi}(u)-\phi(u)\mid  \leq \parallel\hat{\phi}\parallel_{H_{k}} s(u)\).</p>
+</li>
+</ul>
+</li>
+<li><p>The forward mdoel is first learned using the control inputs and the corresponsing configurations obtained through these inputs.</p>
+</li>
+<li><p>Given this model, the true reaching error is calculated.</p>
+</li>
+<li><p>For estimating the workspace, error certaininty is used to define the true reachable set defined by the error certaininty \((c)\), Th definition:</p>
+<ul>
+<li><p>\(\hat{\chi}_{c} =\left\{x\in\mathbb{R}^{d}: dist(x,\chi)<c\right\}\)</p>
+</li>
+</ul>
+</li>
+<li><p>The paper uses fill-distance for the exploration strategy. For an efficient data collection, the entire space of the samples that constitute the unknown workspace \(\chi\) is selected fot he exploration strategy.</p>
+</li>
+<li><p>To validate the results, following experiments have been performed, 150 data points have been used that completes the reachable set. It was seen that the estimated and the reachable true set match the true-fill distance.</p>
+</li>
+</ul>
+<h3 id="comments"><a href="#comments" class="header-anchor">Comments</a></h3>
+<ul>
+<li><p>The results have been obtained from an actual musculoskeletal system and so have also been tested for a real-world scenario.</p>
+</li>
+<li><p>This paper can provide good insights to people who are working on 3D origami robotics.</p>
+</li>
+</ul>
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Hasan Poonawala. Last modified: March 10, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div> <!-- end of class main-content -->
+    </div> <!-- end of class main-content-wrap -->
+    </div> <!-- end of class page-wrap-->
+
+    
+      <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+    
+    
+    <script src="https://unpkg.com/stackedit-js@1.0.7/docs/lib/stackedit.min.js"></script>
+    <script>
+    import Stackedit from 'stackedit-js';
+    const el = document.querySelector('textarea');
+      const stackedit = new Stackedit();
+
+      // Open the iframe
+      stackedit.openFile({
+        name: 'Filename', // with an optional filename
+        content: {
+          text: el.value // and the Markdown content.
+        }
+      });
+
+      // Listen to StackEdit events and apply the changes to the textarea.
+      stackedit.on('fileChange', (file) => {
+        el.value = file.content.text;
+      });</script>
+  </body>
+</html>

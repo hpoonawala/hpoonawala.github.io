@@ -2,20 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
-    <loc>guidelines/index.html</loc>
-    <lastmod>2021-02-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>index.html</loc>
-    <lastmod>2021-02-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>reviews/2021_Auto/index.html</loc>
-    <lastmod>2021-02-21</lastmod>
+    <loc>reviews/Review_two/index.html</loc>
+    <lastmod>2021-03-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -26,14 +14,8 @@
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>reviews/on_the_feedback_linearization_of_robots_with_variable_stiffness/index.html</loc>
-    <lastmod>2021-03-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>reviews/2006_UAV_dynamics/index.html</loc>
-    <lastmod>2021-03-03</lastmod>
+    <loc>reviews/2021_03_05_low_cost_automation_for_gravity_compensation_of_robotic_arm_review/index.html</loc>
+    <lastmod>2021-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -46,6 +28,48 @@
 <url>
     <loc>reviews/active-inverse-model-learning/index.html</loc>
     <lastmod>2021-03-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>reviews/SID_KF/index.html</loc>
+    <lastmod>2021-03-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>reviews/2021_Auto/index.html</loc>
+    <lastmod>2021-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>reviews/apt/index.html</loc>
+    <lastmod>2021-03-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>guidelines/index.html</loc>
+    <lastmod>2021-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>index.html</loc>
+    <lastmod>2021-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>reviews/on_the_feedback_linearization_of_robots_with_variable_stiffness/index.html</loc>
+    <lastmod>2021-03-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>reviews/2006_UAV_dynamics/index.html</loc>
+    <lastmod>2021-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>

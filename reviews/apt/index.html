@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+     
+  
+    <link rel="stylesheet" href="/css/jtd.css">
+  <link rel="icon" href="/assets/favicon.ico">
+
+   <title>Behavior from the Void: Unsupervised Active Pre-Training</title>  
+</head>
+<body>                      <!-- closed in foot.html -->
+<div class="page-wrap">   <!-- closed in foot.html -->
+  <!-- SIDE BAR -->
+  <div class="side-bar">
+    <div class="header">
+      <a href="/" class="title">
+        Lab Resources
+      </a>
+    </div>
+    <label for="show-menu" class="show-menu">MENU</label>
+    <input type="checkbox" id="show-menu" role="button">
+    <div class="menu" id="side-menu">
+      <ul class="menu-list">
+        <li class="menu-list-item "><a href="/" class="menu-list-link ">Home</a>
+        <li class="menu-list-item "><a href="/guidelines/" class="menu-list-link ">Guidelines</a>
+        <li class="menu-list-item "><a href="/tag/reviews/" class="menu-list-link ">Reviews</a>
+      </ul>
+    </div>
+    <div class="footer">
+      This is <em>Just the docs</em>, adapted from the <a href="https://github.com/pmarsceill/just-the-docs" target="_blank">Jekyll theme</a>.
+    </div>
+  </div>
+  <!-- CONTENT -->
+  <div class="main-content-wrap"> <!-- closed in foot.html -->
+    <div class="main-content">    <!-- closed in foot.html -->
+      <div class="main-header">
+        <a id="github" href="https://web.engr.uky.edu/~hap/">Poonawala Lab Website</a>
+      </div>
+
+
+
+<!-- Content appended here (in class franklin-content) -->
+
+
+<h2> Behavior from the Void: Unsupervised Active Pre-Training</h2>
+<ul>
+
+<li> Authors: Liu, Hao; Abbeel, Pieter;</li>
+
+
+<li>Venue: arXiv</li>
+
+
+<li>Year: 2021</li>
+
+
+<li> Reviewed by: Benton Clark, 
+</li>
+
+</ul>
+
+
+<div class="franklin-content"><div class="franklin-toc"><ol><li><a href="#link_to_paper">Link to Paper</a></li><li><a href="#broad_areaoverview">Broad area/overview</a></li><li><a href="#notation">Notation</a></li><li><a href="#specific_problem">Specific Problem</a></li><li><a href="#solution_ideas">Solution Ideas</a></li><li><a href="#comments">Comments</a></li><li><a href="#issues">Issues</a></li><li><a href="#recent_papers">Recent Papers</a></li></ol></div>
+<h3 id="link_to_paper"><a href="#link_to_paper" class="header-anchor">Link to Paper</a></h3>
+<p>The paper can be found at the ArXiv link <a href="https://arxiv.org/pdf/2103.04551.pdf">here</a>.</p>
+<h3 id="broad_areaoverview"><a href="#broad_areaoverview" class="header-anchor">Broad area/overview</a></h3>
+<p>This paper addresses an efficient manner to learn a policy map \(\pi(a|s)\) to provide an initial policy for deep reinforcement learning &#40;DRL&#41; purposes. It aims to learn \(\pi(a|s)\) in an unsupervised fashion by finding novel states to visit based in a task-agnostic environment. In this sense, it should learn faster when the environment reward is enabled due to better exploration during the pre-training phase.</p>
+<h3 id="notation"><a href="#notation" class="header-anchor">Notation</a></h3>
+<ul>
+<li><p>MDP \(\mathcal{M} \triangleq (\mathcal{S},\mathcal{A},\mathcal{T},p_0,r,\gamma)\) where</p>
+</li>
+</ul>
+<p>* \(\mathcal{S}\subseteq\mathbb{R}^{n_s}\) is the state space,
+* \(\mathcal{A}\subseteq\mathbb{R}^{n_a}\) is the action space,
+* \(\mathcal{T}:\mathcal{S}\times\mathcal{A}\times\mathcal{S}\rightarrow[0,1]\) is the state/action transition probability model,
+* \(p_0:\mathcal{S}\rightarrow[0,1]\) is the distribution over initial states,
+* \(r:\mathcal{S}\times\mathcal{A}\times\mathcal{S}\rightarrow\mathbb{R}\) is the reward function, and
+* \(\gamma\in[0,1)\) is the discount factor</p>
+<ul>
+<li><p>\(Q:\mathcal{S}\times\mathcal{A}\rightarrow\mathbb{R}\), the state/action valuation function,</p>
+</li>
+<li><p>A policy map \(\pi:\mathcal{S}\times\mathcal{A}\rightarrow[0,1]\), which is the probability of taking action \(a\in\mathcal{A}\) in state \(s\in\mathcal{S}\)</p>
+</li>
+<li><p>\(f_\theta:\mathcal{S}\rightarrow\mathcal{Z}\), a \(\theta\)-parameterized mapping between the state space \(\mathcal{S}\) &#40;pixels&#41; and an abstract latent representation \(\mathcal{Z}\)</p>
+</li>
+</ul>
+<h3 id="specific_problem"><a href="#specific_problem" class="header-anchor">Specific Problem</a></h3>
+<p>Using DRL to learn a task specific optimal policy \(\pi^\star\) directly from image pixels is both difficult and data inefficient. The author&#39;s aim to address this short-coming by pretraining a policy \(\pi(a|s)\) using an unsupervised method based upon entropy maximization encouraging visitation of unexplored states. In doing so, they also learn a mapping between raw pixel images and an abstract latent space, denoted \(f_\theta(s)\in\mathcal{Z}\), as well as pretraining the \(\hat{Q}(s,a)\) network.</p>
+<h3 id="solution_ideas"><a href="#solution_ideas" class="header-anchor">Solution Ideas</a></h3>
+<ul>
+<li><p>For the following points, pre-training refers to the process of allowing an RL agent to explore the environment in a &quot;task-agnostic&quot; fashion. This means that a reward function is not specifically tuned for accomplishing a task, but rather is substituted in favor of state/action exploration reward policy.</p>
+</li>
+<li><p>It appears that three main tasks are being accomplished by this paper:</p>
+</li>
+</ul>
+<ol>
+<li><p>Learning a pixel to latent space mapping \(f_\theta(s)\)</p>
+</li>
+<li><p>Pre-training a policy \(\pi(a|s)\)</p>
+</li>
+<li><p>Pre-training a state/action valuation estimate \(\hat{Q}(s,a)\)</p>
+</li>
+</ol>
+<ul>
+<li><p>Point &#40;1&#41; is listed first as it is not part of the novel contributions of the paper, but rather an artifact of efficiently learning pixel-wise representations in an efficient manner as proposed by another paper. Thus, it will not be further discussed in this review. It should also be noted that this mapping is indeed ancillary to the proposed aim of the paper, as the author&#39;s claim that their APT algorithm is capable of being fitted to many DRL algorithms, not exclusively pixel-wise learning problems.</p>
+</li>
+<li><p>Point &#40;2&#41; focuses on an efficient self-supervised routine to pretrain a policy \(\pi(a|s)\). In the author&#39;s work, this represents a stochastic action selection policy, where each action is drawn from the policy distribution \(a_i \sim \pi(a|s)\).</p>
+</li>
+<li><p>Point &#40;3&#41; focuses on learning an adaptable state/action value function that is capable of learning in a sample efficient manner once actual training occurs in the true environment. Since the true task-specific reward function is not available during pre-training, the \(\hat{Q}(s,a)\) value is estimated using an entropy based, exploration friendly reward scheme.</p>
+</li>
+</ul>
+<p>* One interesting feature of this reward function is the following:</p>
+<p>Let \(T\) represent the total number of state observations gathered. Then \(\lim_{T\rightarrow\infty}r(s,a,s')=0\quad \forall s\in\mathcal{S}\) 	* What makes it interesting is that as more episodes are collected, the reward for visiting any other state reduces to 0. In this sense, exploration is encouraged by rewarding a policy for taking an action leading to a less explored state. 	* This reward is estimated based off of an entropy-particle based estimation. Specific details are omitted as they are not unique to the paper.</p>
+<ul>
+<li><p>Once pre-training has occurred, the network is then trained with the task-specific rewards enabled in each environment. As shown in the paper, the APT trained networks equally perform, and even out-perform, many state-of-the-art DRL algorithms.</p>
+</li>
+</ul>
+<h3 id="comments"><a href="#comments" class="header-anchor">Comments</a></h3>
+<ul>
+<li><p>It is unclear what is really gained from the pre-training. The authors make no real mention of this, though they do make the statement &quot;Our motivation is that by doing so, the learned behavior and representation can be trained on the whole environment while being as task agnostic as possible.&quot; Perhaps the true power of APT in this case then was to provide sufficient exploration to properly train the network \(f_\theta\) without any real benefit to actual RL occurring.</p>
+</li>
+<li><p>Perhaps a better approach would be to use this exploration algorithm to try and model the transition dynamics \(\mathcal{T}\) since exploration and state/action visitation is what is most rewarded during pre-training.</p>
+</li>
+<li><p>Overall, paper seemed rather disorganized, and spent a large amount of page real-estate focused on a completely different issue &#40;mapping image pixels to lower-dimensional latent representations&#41;, for which their method used was directly pulled from another publication.</p>
+</li>
+</ul>
+<h3 id="issues"><a href="#issues" class="header-anchor">Issues</a></h3>
+<ul>
+<li><p>There does not seem to be a definition given for what \(\pi(a|s)\) really represents here. The authors mention it only in this symbolic term, do not explain how it is updated in a gradient descent step, and only use to to sample actions in the listed algorithm. So what exactly is \(\pi(a|s)\) in the given context, and what benefit does training it provide to the algorithm as a whole?</p>
+</li>
+<li><p>The novelty of the proposed method is questionable. It combines well known ideas in information theory with previously demonstrated work in DRL, and the proposed &quot;big gain&quot; from this method is the incorporation of a particle-based entropy estimator based on a \(k\)-nearest neighbors solution, which was first formulated in another previous work.</p>
+</li>
+<li><p>The experimental results may actually be counter-indicative to the claim they attempt to make. The idea is that this pre-training method will provide greater reward in a more sample efficient manner compared to other DRL algorithms. Specifically, they compare their results to a new and interesting DRL algorithm DrQ, which is also capable of learning policies from raw pixel values. However, there are several issues:</p>
+</li>
+</ul>
+<p>* The APT algorithm allowed for 5-250 million pre-training simulator time-steps. These pre-trained networks were then tested against raw networks that had no training of any kind initially. Thus, there is an unfair advantage in terms of the number of initial states.
+* The APT algorithm results are superior in most cases, but often not by huge margins. On top of that, most of the other DRL algorithms it is compared against train in roughly 1-2M simulator time-steps, meaning in reality, the other DRL algorithms are learning from scratch faster.
+* However, it could be that once pre-training in an environment was done once, the weights could then be re-used. If enough optimal policies are desired for tasks in an identical environment, then perhaps there is the potential for utility in the proposed method. However, the author&#39;s do not mention if the weights are re-used on similar environments.</p>
+<h3 id="recent_papers"><a href="#recent_papers" class="header-anchor">Recent Papers</a></h3>
+<ul>
+<li><p>The <a href="https://arxiv.org/abs/2004.13649">DrQ</a> algorithm is a DRL algorithm also capable of learning policies directly from raw pixel values.</p>
+</li>
+</ul>
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Hasan Poonawala. Last modified: March 17, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div> <!-- end of class main-content -->
+    </div> <!-- end of class main-content-wrap -->
+    </div> <!-- end of class page-wrap-->
+
+    
+      <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+    
+    
+    <script src="https://unpkg.com/stackedit-js@1.0.7/docs/lib/stackedit.min.js"></script>
+    <script>
+    import Stackedit from 'stackedit-js';
+    const el = document.querySelector('textarea');
+      const stackedit = new Stackedit();
+
+      // Open the iframe
+      stackedit.openFile({
+        name: 'Filename', // with an optional filename
+        content: {
+          text: el.value // and the Markdown content.
+        }
+      });
+
+      // Listen to StackEdit events and apply the changes to the textarea.
+      stackedit.on('fileChange', (file) => {
+        el.value = file.content.text;
+      });</script>
+  </body>
+</html>

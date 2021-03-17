@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+     
+  
+    <link rel="stylesheet" href="/css/jtd.css">
+  <link rel="icon" href="/assets/favicon.ico">
+
+   <title>Low-Cost Automation for Gravity Compensation of Robotic Arm</title>  
+</head>
+<body>                      <!-- closed in foot.html -->
+<div class="page-wrap">   <!-- closed in foot.html -->
+  <!-- SIDE BAR -->
+  <div class="side-bar">
+    <div class="header">
+      <a href="/" class="title">
+        Lab Resources
+      </a>
+    </div>
+    <label for="show-menu" class="show-menu">MENU</label>
+    <input type="checkbox" id="show-menu" role="button">
+    <div class="menu" id="side-menu">
+      <ul class="menu-list">
+        <li class="menu-list-item "><a href="/" class="menu-list-link ">Home</a>
+        <li class="menu-list-item "><a href="/guidelines/" class="menu-list-link ">Guidelines</a>
+        <li class="menu-list-item "><a href="/tag/reviews/" class="menu-list-link ">Reviews</a>
+      </ul>
+    </div>
+    <div class="footer">
+      This is <em>Just the docs</em>, adapted from the <a href="https://github.com/pmarsceill/just-the-docs" target="_blank">Jekyll theme</a>.
+    </div>
+  </div>
+  <!-- CONTENT -->
+  <div class="main-content-wrap"> <!-- closed in foot.html -->
+    <div class="main-content">    <!-- closed in foot.html -->
+      <div class="main-header">
+        <a id="github" href="https://web.engr.uky.edu/~hap/">Poonawala Lab Website</a>
+      </div>
+
+
+
+<!-- Content appended here (in class franklin-content) -->
+
+
+<h2> Low-Cost Automation for Gravity Compensation of Robotic Arm</h2>
+<ul>
+
+<li> Authors: Montalvo, W.; Escobar-Naranjo, J.; Garcia, C.A.; Garcia, M.V.;</li>
+
+
+<li>Venue: Applied Sciences</li>
+
+
+<li>Year: 2020</li>
+
+
+<li> Reviewed by: David Yackzan, 
+</li>
+
+</ul>
+
+
+<div class="franklin-content"><div class="franklin-toc"><ol><li><a href="#broad_areaoverview">Broad area/overview</a></li><li><a href="#notation">Notation</a></li><li><a href="#specific_problem">Specific Problem</a></li><li><a href="#solution_ideas">Solution Ideas</a></li><li><a href="#comments">Comments</a></li></ol></div>
+<h3 id="broad_areaoverview"><a href="#broad_areaoverview" class="header-anchor">Broad area/overview</a></h3>
+<p>This article presents research using a low-cost setup to represent Proportional Derivative &#40;PD&#41; Control with gravity compensation as a robost method for a robotic arm. A raspberry pi microcontroller and the open source Robot Operating System &#40;ROS&#41; software is used for the development of the control algorithm. Gravity compensation is defined in the article as &quot;a term proportional to the position error, to which a damping consisting of the speed of movement is added. &#91;Gravity Compensation&#93; consists of a mechanical retention that absorbs the impulses resulting from the response, suppressing peaks and oscillations. For the stationary stage it is estimated that the position of the effector or terminal tool is constant, assuming a value of zero at the speed of movement.&quot;</p>
+<h3 id="notation"><a href="#notation" class="header-anchor">Notation</a></h3>
+<ul>
+<li><p>\(x\): state, \(X\): State space</p>
+</li>
+<li><p>\(y\): measurement, \(Y\): Measurement Space</p>
+</li>
+<li><p>Controller \(u = g(y)\)</p>
+</li>
+<li><p>\(L\): Set of labels</p>
+</li>
+<li><p>\(C_X \colon X \to L\): Classifier in state space</p>
+</li>
+<li><p>\(C_Y \colon Y \to L\): Classifier in measurement space</p>
+</li>
+<li><p>\(V\): Lyapunov function</p>
+</li>
+<li><p>\(W\): set of hyperplanes that parametrizes \(C_X\)</p>
+</li>
+<li><p>\(W^\Delta\): set of hyperplanes that parametrizes a robust version of \(C_X\)</p>
+</li>
+</ul>
+<h3 id="specific_problem"><a href="#specific_problem" class="header-anchor">Specific Problem</a></h3>
+<p>The authors main research goal is to exhibit the strengths of modern, low-cost methods of controls based gravity compensation. They outline ROS as a versatile tool available for the development of such systems.</p>
+<h3 id="solution_ideas"><a href="#solution_ideas" class="header-anchor">Solution Ideas</a></h3>
+<p>Section 3 of the article outlines the state of the technology. This research makes use of the <em>KUKA youBot Robotic Arm</em> manipulator which is a 5 DoF robotic arm with a two-finger end effector and an omnidirectional base. This manipulator comes system comes equipped with a library that allows for control and monitoring of actuators and sensors. The kinematic equations related to gravity compensation are outlined in section 3.3:</p>
+<ul>
+<li><p>model af a rigid robot with n links:</p>
+<ul>
+<li><p>\(M(q)q'' + C(q,q')q' + G(q) + F(q') = \tau\)</p>
+</li>
+</ul>
+</li>
+<li><p>derivative proportional control derived by correction of error in joint positioning:</p>
+<ul>
+<li><p>\(\tau = Kp(\tilde q) - Kd(\tilde q') + G(q)\)</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>In section 4, the authors outline the study case of this project as the implementation of control strategies using ROS and the Raspberry Pi with the common use of a robotic arm for positioning of objects.</p>
+<p>In section 5 both the ROS node architecture and the cascaded PID regulation block diagram are outlined and illustrated. The ROS node infrastrcucture consists of 5 nodes: the Graphical User Interface &#40;GUI&#41;, the controller node, the robot arm state node, and the youBot hardware node. The GUI takes user input which the control node filters to a controlled command and communicates to the robot arm state node. The arm state node then uses the robot driver to make move the mechanism according to the controlled input from the user.</p>
+<p>Section 5.5 describes the ROS class used for gravity compensation called Module Gravity Compensation and its three subclasses:</p>
+<ul>
+<li><p>Controller Module Class: contains methods for inverse kinematics and trajectory planning</p>
+</li>
+<li><p>Arm Dynamics Class: contains methods that handle the dynamical relationships between the robot and gravity and inertial forces. This class computes the calculations for gravity compensation</p>
+</li>
+<li><p>youBotKinematics sub-Class: contains more specific information and methods that pertain to the robot used for this research</p>
+</li>
+</ul>
+<p>In the results section, the authors summarize the performance of the system after completing 20 executions of a pick and place task. The delay necessary for the study case to complete its gravity compensation computations is calculated for each iteration. The delays are just above .01 seconds for most of the tasks, with a few outliers approaching .07 seconds.</p>
+<h3 id="comments"><a href="#comments" class="header-anchor">Comments</a></h3>
+<ul>
+<li><p>This article provides extensive details about the communication infrastrcucture between the robot, Raspberry Pi and ROS as well as details outlining the programming libraries and classes used.</p>
+</li>
+</ul>
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Hasan Poonawala. Last modified: March 17, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div> <!-- end of class main-content -->
+    </div> <!-- end of class main-content-wrap -->
+    </div> <!-- end of class page-wrap-->
+
+    
+      <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+    
+    
+    <script src="https://unpkg.com/stackedit-js@1.0.7/docs/lib/stackedit.min.js"></script>
+    <script>
+    import Stackedit from 'stackedit-js';
+    const el = document.querySelector('textarea');
+      const stackedit = new Stackedit();
+
+      // Open the iframe
+      stackedit.openFile({
+        name: 'Filename', // with an optional filename
+        content: {
+          text: el.value // and the Markdown content.
+        }
+      });
+
+      // Listen to StackEdit events and apply the changes to the textarea.
+      stackedit.on('fileChange', (file) => {
+        el.value = file.content.text;
+      });</script>
+  </body>
+</html>

@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+     
+  
+    <link rel="stylesheet" href="/css/jtd.css">
+  <link rel="icon" href="/assets/favicon.ico">
+
+   <title>Impedance Control: An Approach to Manipulation: Part I-Theory</title>  
+</head>
+<body>                      <!-- closed in foot.html -->
+<div class="page-wrap">   <!-- closed in foot.html -->
+  <!-- SIDE BAR -->
+  <div class="side-bar">
+    <div class="header">
+      <a href="/" class="title">
+        Lab Resources
+      </a>
+    </div>
+    <label for="show-menu" class="show-menu">MENU</label>
+    <input type="checkbox" id="show-menu" role="button">
+    <div class="menu" id="side-menu">
+      <ul class="menu-list">
+        <li class="menu-list-item "><a href="/" class="menu-list-link ">Home</a>
+        <li class="menu-list-item "><a href="/guidelines/" class="menu-list-link ">Guidelines</a>
+        <li class="menu-list-item "><a href="/tag/reviews/" class="menu-list-link ">Reviews</a>
+      </ul>
+    </div>
+    <div class="footer">
+      This is <em>Just the docs</em>, adapted from the <a href="https://github.com/pmarsceill/just-the-docs" target="_blank">Jekyll theme</a>.
+    </div>
+  </div>
+  <!-- CONTENT -->
+  <div class="main-content-wrap"> <!-- closed in foot.html -->
+    <div class="main-content">    <!-- closed in foot.html -->
+      <div class="main-header">
+        <a id="github" href="https://web.engr.uky.edu/~hap/">Poonawala Lab Website</a>
+      </div>
+
+
+
+<!-- Content appended here (in class franklin-content) -->
+
+
+<h2> Impedance Control: An Approach to Manipulation: Part I-Theory</h2>
+<ul>
+
+<li> Authors: Hogan, N.;</li>
+
+
+<li>Venue: Journal of dynamic systems, Measurement and Control</li>
+
+
+<li>Year: 1985</li>
+
+
+<li> Reviewed by: Pouya Samanipour, Mohammad Mohammadzadeh, 
+</li>
+
+</ul>
+
+
+<div class="franklin-content"><div class="franklin-toc"><ol><li><a href="#broad_areaoverview">Broad area/overview</a></li><li><a href="#notation">Notation</a></li><li><a href="#specific_problem">Specific Problem</a></li><li><a href="#basic_ideas_and_definitions">Basic Ideas and definitions</a></li><li><a href="#conclusion">Conclusion</a></li><li><a href="#recent_papers">Recent Papers</a></li></ol></div>
+<h3 id="broad_areaoverview"><a href="#broad_areaoverview" class="header-anchor">Broad area/overview</a></h3>
+<p>Manipulation fundamentally requires the manipulator to be mechanically coupled to the object being manipulated; the manipulator may not be treated as an isolated system. in this paper an approach is developed by considering the mechanics of interaction between physical systems. it was shown that control of position or force alone is inadequate; control of dynamic behavior is also required. It is shown that as manipulation is a fundamentally nonlinear problem, the distinction between impedance and admittance is essential, and given the environment contains inertial objects, the manipulator must be an impedance. A generalization of a Norton equivalent network is defined for a broad class of nonlinear manipulators which separates the control of motion from the control of impedance while preserving the superposition properties of the Norton network.</p>
+<h3 id="notation"><a href="#notation" class="header-anchor">Notation</a></h3>
+<ul>
+<li><p>\(W\): Mechanical work</p>
+</li>
+<li><p>\(F\): Force</p>
+</li>
+<li><p>\(T\): Torque</p>
+</li>
+<li><p>\(: { {c } } \): Modulation by command set</p>
+</li>
+<li><p>\(S_e\): Effort&#40;force&#41; source</p>
+</li>
+<li><p>\(S_f\): Flow&#40;Velocity&#41; control</p>
+</li>
+<li><p>\(Z\): Impedance</p>
+</li>
+<li><p>\(Y\): Admittance</p>
+</li>
+<li><p>\(Z_o\): nodic Impedance</p>
+</li>
+<li><p>\(Z_n\): Nonnodic impedance</p>
+</li>
+<li><p>\(X_o\): virtual position</p>
+</li>
+<li><p>\(V_o\): virtual velocity</p>
+</li>
+</ul>
+<h3 id="specific_problem"><a href="#specific_problem" class="header-anchor">Specific Problem</a></h3>
+<p>This paper has presented a unified approach to manipulation termed &quot;impedance control.&quot; Because by its nature manipulation requires mechanical interaction between systems, the focus of the approach is on the characterization and control of interaction. By assuming that no control algorithm may make a physical system behave like anything other than a physical system the network concepts of bond graphs may be applied to describe the way the controller may modify the behavior of the manipulator.</p>
+<h3 id="basic_ideas_and_definitions"><a href="#basic_ideas_and_definitions" class="header-anchor">Basic Ideas and definitions</a></h3>
+<ul>
+<li><p>The manipulator is some collection of physical structures, sensors, and actuators &#40;hardware&#41; combined with some set of control algorithms &#40;software&#41;. A unified framework for considering the action of both hardware and software in the control of dynamic behavior can be obtained by making the reasonable assumption that no controller can make the manipulator appear to the environment as anything other than a physical system.</p>
+</li>
+</ul>
+<p><img src="/assets/img/Capture_1.png" alt="" /></p>
+<ul>
+<li><p>in this paper admittances is defined as a system accepting effort &#40;e.g., force&#41; inputs and yielding flow &#40;e.g., motion&#41; outputs; and impedances accepting flow &#40;e.g., motion&#41; inputs and yielding effort &#40;e.g., force&#41; outputs.</p>
+</li>
+<li><p>The distinction between admittance and impedance is fundamental: Real physical systems exist which can be described in one form and not the other.</p>
+</li>
+<li><p>The most important consequence of dynamic interaction between two physical systems is that one must physically complement the other: Along any degree of freedom, if one is an impedance, the other must be an admittance and vice versa.</p>
+</li>
+<li><p>the controller should be capable of modulating the impedance of the manipulator as appropriate for a particular phase of a task.</p>
+</li>
+<li><p>The simplest equivalent physical network representing impedance control is shown in the following figure. The position commanded by the high-level supervisor is represented by a flow source, an ideal element which may impose any time history of velocity on the rest of the system. To prevent causal conflict between this element and the environmental admittance &#40;which must experience an impressed effort&#41; a zero junction is interposed between the two. The impedance coupled to this zero-junction represents the relation between force and motion commanded by the supervisor and includes both the static force/displacement relation plus the possible dynamic terms required to ensure controlled dynamic behavior.</p>
+</li>
+</ul>
+<p><img src="/assets/img/Capture_2.png" alt="" /></p>
+<ul>
+<li><p>The only assumptions made were that the manipulator is sufficiently controllable to be able to determine an equilibrium position of an unconstrained inertial object such as a mass, that the port impedance is nodic, and that its static component is such that if its gradient is nonzero then zero force defines an unique position—not a restrictive set of assumptions.</p>
+</li>
+</ul>
+<ol>
+<li><p>\(dz/dt=Z_s[z,(V_o:\)&#123;c&#125;-Y<em>o&#40;y&#41;&#41;&#93;:&#123;c&#125;\(
+
+ 1. \)dy/dt&#61;Y</em>s&#91;y,Z<em>o&#40;z,V</em>o:\(\{c}-Y_o(y))]:\{c\}\)</p>
+</li>
+</ol>
+<ol>
+<li><p>\(F=Z_o(z,[V_o:\{c\}-Y_o(y)]):\{c\}\)</p>
+</li>
+</ol>
+<ol>
+<li><p>\(V=Y_o(y)\)</p>
+</li>
+</ol>
+<h3 id="conclusion"><a href="#conclusion" class="header-anchor">Conclusion</a></h3>
+<ul>
+<li><p>The most interesting consequence of the assumptions underlying impedance control is that if the dynamic behavior of the manipulator is dissected into a set of component impedances, these may be reassembled by simple addition even when the behavior of any or all of the components is nonlinear. This is a direct consequence of the assumption that the environment is an admittance.</p>
+</li>
+<li><p>When the manipulator is decoupled from its environment the terms in the dynamic equations due to the environmental admittance disappear and in principle the manipulator alone need exhibit no inertial behavior. In practice the uncoupled manipulator still has inertia. Because of the inevitable inertial dynamics of the isolated manipulator the superposition of impedances holds even when the manipulator is uncoupled from its environment as there is always an admittance to sum forces and impedances.</p>
+</li>
+</ul>
+<h3 id="recent_papers"><a href="#recent_papers" class="header-anchor">Recent Papers</a></h3>
+<ul>
+<li><p>Yang, Z., Peng, J., &amp; Liu, Y. &#40;2019&#41;. Adaptive neural network force tracking impedance control for uncertain robotic manipulator based on nonlinear velocity observer. Neurocomputing, 331, 263-280.</p>
+</li>
+<li><p>Peng, J., Yang, Z., &amp; Ma, T. &#40;2019&#41;. Position/force tracking impedance control for robotic systems with uncertainties based on adaptive jacobian and neural network. Complexity, 2019.</p>
+</li>
+</ul>
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Hasan Poonawala. Last modified: March 22, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div> <!-- end of class main-content -->
+    </div> <!-- end of class main-content-wrap -->
+    </div> <!-- end of class page-wrap-->
+
+    
+      <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+    
+    
+    <script src="https://unpkg.com/stackedit-js@1.0.7/docs/lib/stackedit.min.js"></script>
+    <script>
+    import Stackedit from 'stackedit-js';
+    const el = document.querySelector('textarea');
+      const stackedit = new Stackedit();
+
+      // Open the iframe
+      stackedit.openFile({
+        name: 'Filename', // with an optional filename
+        content: {
+          text: el.value // and the Markdown content.
+        }
+      });
+
+      // Listen to StackEdit events and apply the changes to the textarea.
+      stackedit.on('fileChange', (file) => {
+        el.value = file.content.text;
+      });</script>
+  </body>
+</html>

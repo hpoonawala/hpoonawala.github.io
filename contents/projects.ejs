@@ -1,0 +1,40 @@
+```{=html}
+<div class="research project-list">
+<ul>
+<% for (const item of items) { %>
+  <a href="<%- item.path %>"><%= item.title %></a>
+
+    <div class="thumbnail">
+        <a href="<%- item.path %>">
+		 <img src="<%- item.image%>" width="200" height="200" overflow="hidden">
+        </img>
+    </a>
+    </div>
+  
+<% } %>
+</ul>
+
+<% for (const item of items) { %>
+    <div class="thumbnail">
+        <a href="<%= item.path %>">
+		 <img src="<%- item.image%>" width="200" height="200" >
+        <!-- preview image tag here -->
+        </a>
+    </a>
+    </div>
+    <div >
+        <a href="<%= item.path %>">
+        <h3 ><%= item.title %></h3>
+        <div ><%= item.subtitle %></div>
+        </a>
+        <a href="<%= item.path %>">
+        </a>
+    </div>
+    <div class="metadata">
+        <a href="<%- item.path %>">
+		hhhhh
+        </a>
+    </div>
+
+<% } %>
+```

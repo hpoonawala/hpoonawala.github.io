@@ -32,7 +32,7 @@
     "href": "projects/lidarbot.html",
     "title": "LiDAR robot",
     "section": "",
-    "text": "This project worked on building a mobile robot using relatively easy-to-source parts together with minimal 3D printing (Link to OpenSCAD files). The robot uses a simple RPLiDAR for feedback1.\nThe chassis uses spacers and 3D printing. The robot combines a Raspberry Pi 4 for sensor processing with an ESP32-s3 for motor control. The Raspberry Pi uses python and sends commands using pyserial to the ESP32-s3. The ESP32-s3 was programmed in C using the esp-idf development framework."
+    "text": "This project worked on building a mobile robot using relatively easy-to-source parts together with minimal 3D printing (Link to OpenSCAD files). The robot uses a simple RPLiDAR for feedback1.\nThe chassis uses spacers and 3D printing. The robot combines a Raspberry Pi 4 for sensor processing with an ESP32-s3 for motor control. The Raspberry Pi uses python and sends commands using pyserial to the ESP32-s3. Recent updates use c++ for navigation. The ESP32-s3 was programmed in C using the esp-idf development framework."
   },
   {
     "objectID": "projects/lidarbot.html#footnotes",
